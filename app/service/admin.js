@@ -89,10 +89,13 @@ class AdminService extends Service {
 
     async showStu(params) {
         const { ctx } = this
-        const { pagesize, pagenumber } = params
+        const { pagesize, pagenumber, recordid } = params
         const res = await ctx.model.Student.findAndCountAll({
             limit: Number(pagesize),
-            offset: (Number(pagenumber) - 1) * Number(pagesize)
+            offset: (Number(pagenumber) - 1) * Number(pagesize),
+            where: {
+                recordto: recordid
+            }
         });
         return res
     }

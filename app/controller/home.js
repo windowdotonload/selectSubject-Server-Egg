@@ -14,21 +14,21 @@ class HomeController extends Controller {
     // 测试处理上传的xlsx文件
     //********************** */
     // mode:file
-    const file = ctx.request.files[0];
-    console.log('--------')
-    console.log(file)
-    console.log('-------')
-    const workbook = xlsx.readFile(file.filepath);
-    console.log('workbook', workbook)
-    console.log('A1 = ', workbook.Sheets.Sheet1.A1)
-    console.log('B1 = ', workbook.Sheets.Sheet1.B1)
-    console.log('A2 = ', workbook.Sheets.Sheet1.A2)
-    console.log('B2 = ', workbook.Sheets.Sheet1.B2)
+    // const file = ctx.request.files[0];
+    // console.log('--------')
+    // console.log(file)
+    // console.log('-------')
+    // const workbook = xlsx.readFile(file.filepath);
+    // console.log('workbook', workbook)
+    // console.log('A1 = ', workbook.Sheets.Sheet1.A1)
+    // console.log('B1 = ', workbook.Sheets.Sheet1.B1)
+    // console.log('A2 = ', workbook.Sheets.Sheet1.A2)
+    // console.log('B2 = ', workbook.Sheets.Sheet1.B2)
     // 直接转化为json
-    let data = xlsx.utils.sheet_to_json(workbook.Sheets.Sheet1)
+    // let data = xlsx.utils.sheet_to_json(workbook.Sheets.Sheet1)
     // console.log('worksheet_to_json', xlsx.utils.sheet_to_json(workbook.Sheets.Sheet1))
-    console.log(data)
-    console.log(data[0]["姓名"])
+    // console.log(data)
+    // console.log(data[0]["姓名"])
 
     //********************** */
     // 测试读取文件流 使用流那么config.default.js中config.multipart 的mode就不能设置为file
@@ -36,7 +36,17 @@ class HomeController extends Controller {
     // const stream = await ctx.getFileStream();
     // console.log('stream', stream)
 
-    ctx.body = 'index'
+
+    /**
+     * 
+     * 测试连表查询
+     */
+    let result = await ctx.model.Student.findAll({
+      include: {
+        model: ctx.model.Record
+      }
+    });
+    ctx.body = result
     // ctx.body = ctx.request.files
     // const workbook = xlsx.readFile(file.filepath)
     // console.log(workbook)

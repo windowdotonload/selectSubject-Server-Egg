@@ -21,11 +21,13 @@ module.exports = app => {
         ethnic_groups: STRING,
         select_teacher: STRING,
         select_subject: STRING,
-        record: STRING
+        recordto: INTEGER
     }, {
         tableName: 'student'
     });
 
-
+    student.associate = function () {
+        app.model.Student.belongsTo(app.model.Record, { foreignKey: 'recordto' });
+    }
     return student;
 };

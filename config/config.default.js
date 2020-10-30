@@ -72,7 +72,7 @@ module.exports = appInfo => {
   config.auth = {
     // ignore: '/login'
     ignore(ctx) {
-      if (ctx.request.url === '/login' || ctx.request.url === '/receiveFile') {
+      if (ctx.request.url === '/login' || ctx.request.url === '/receiveFile' || ctx.request.url === '/test') {
         return true
       }
     }
