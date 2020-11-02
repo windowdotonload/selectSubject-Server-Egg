@@ -19,12 +19,21 @@ class TestController extends Controller {
          * 测试多表连表查询
          */
 
-        let result = await ctx.model.Record.findOne({
-            where: {
-                id: 9
-            },
+        // let result = await ctx.model.Record.findOne({
+        //     where: {
+        //         id: 9
+        //     },
+        //     include: {
+        //         model: ctx.model.Teacher
+        //     }
+        // })
+
+        let result = await ctx.model.Teacher.findAll({
             include: {
-                model: ctx.model.Teacher
+                model: ctx.model.Record,
+                where: {
+                    id: 9
+                }
             }
         })
         console.log(result)
