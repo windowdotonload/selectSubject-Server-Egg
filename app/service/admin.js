@@ -45,6 +45,7 @@ class AdminService extends Service {
     async addStuData(params) {
         const { ctx } = this
         // console.log(params)
+        const recordto = params.recordto
 
         params.forEach(async (item) => {
             // console.log(item)
@@ -60,14 +61,16 @@ class AdminService extends Service {
                 政治面貌: political_status,
                 民族: ethnic_groups,
                 所选老师: select_teacher,
-                所选课题: select_subject
+                所选课题: select_subject,
             } = item
+
             let exit = await ctx.model.Student.findOne({
                 where: {
                     studentnumber
                 }
             });
-            console.log('exit is  ', exit)
+
+            // console.log('exit is  ', exit)
             if (!exit) {
                 let res = await ctx.model.Student.create({
                     username: String(username),
@@ -82,7 +85,12 @@ class AdminService extends Service {
                     ethnic_groups,
                     select_teacher,
                     select_subject,
+                    recordto
                 });
+                // console.log(res)
+            } else {
+                let res = await exit.update({ recordto })
+                // console.log('after updata res is this    ', res)
             }
         })
     }

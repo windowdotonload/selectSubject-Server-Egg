@@ -66,8 +66,21 @@ class AdminController extends Controller {
         }
     }
 
+    static recordid = 0
+    async addRecordId() {
+        const { ctx } = this
+        AdminController.recordid = ctx.query.id
+        // console.log('---------')
+        // console.log(AdminController.recordid)
+        // console.log('---------')
+        ctx.body = {
+            msg: "添加id成功",
+            data: AdminController.recordid
+        }
 
-    static fileUploadStatus = null
+    }
+
+
     // 处理接受的文件
     async receiveFile() {
         const { ctx } = this
@@ -76,6 +89,7 @@ class AdminController extends Controller {
             const workbook = xlsx.readFile(file.filepath);
             // 直接转化为json
             let data = xlsx.utils.sheet_to_json(workbook.Sheets.Sheet1)
+            data.recordto = AdminController.recordid
             if (data) {
                 // console.log(data)
                 await ctx.service.admin.addStuData(data)
@@ -99,6 +113,9 @@ class AdminController extends Controller {
             ctx.body = AdminController.fileUploadStatus
         }
     }
+
+
+    static fileUploadStatus = null
     // 检测文件上传状态
     async checkUploadStatus() {
         const { ctx } = this
