@@ -4,15 +4,30 @@ const Controller = require('egg').Controller;
 
 class TestController extends Controller {
     async index() {
+        const { ctx } = this
+
         /**
          * 测试联表查询
          */
-        const { ctx } = this
-        let result = await ctx.model.Student.findAll({
+        // let result = await ctx.model.Student.findAll({
+        //     include: {
+        //         model: ctx.model.Record
+        //     }
+        // });
+
+        /**
+         * 测试多表连表查询
+         */
+
+        let result = await ctx.model.Record.findOne({
+            where: {
+                id: 9
+            },
             include: {
-                model: ctx.model.Record
+                model: ctx.model.Teacher
             }
-        });
+        })
+        console.log(result)
         ctx.body = result
     }
 }

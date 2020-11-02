@@ -16,7 +16,9 @@ module.exports = app => {
   router.get('/checkUploadStatus', controller.admin.admin.checkUploadStatus)
   router.get('/showStudent', controller.admin.admin.showStudent)
   router.get('/addRecordId', controller.admin.admin.addRecordId)
+  router.post('/addTeaToRecord', controller.admin.admin.addTeaToRec)
   router.post('/addTacher', controller.teacher.teacher.addTacher)
   router.get('/showTeacher', controller.teacher.teacher.showTeacher)
   router.post('/editTeacher', controller.teacher.teacher.editTeacher)
+  router.get('/showSelectTeacher', controller.admin.admin.showSelectTeacher)
 };

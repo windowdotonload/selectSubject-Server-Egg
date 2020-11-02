@@ -141,6 +141,34 @@ class AdminController extends Controller {
             }
         }
     }
+
+    async addTeaToRec() {
+        const { ctx } = this
+        // console.log(ctx.request.body)
+        let res = await ctx.service.teatorec.addTTR(ctx.request.body)
+        // console.log('-----------')
+        // console.log('res is ', res)
+        // console.log('-----------')
+        if (res) {
+            ctx.body = {
+                msg: 'success',
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: "error"
+            }
+        }
+    }
+
+    async showSelectTeacher() {
+        const { ctx } = this
+        // console.log(ctx.query)
+        let res = await ctx.service.teatorec.showTeacherByTTR(ctx.query)
+        ctx.body = {
+            msg: 'showSelectTeacher'
+        }
+    }
 }
 
 module.exports = AdminController;

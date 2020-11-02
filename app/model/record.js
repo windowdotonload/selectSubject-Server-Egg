@@ -21,6 +21,13 @@ module.exports = app => {
         tableName: 'record'
     });
 
+    record.associate = () => {
+        app.model.Record.belongsToMany(app.model.Teacher, {
+            through: app.model.TeaTOrec,
+            foreignKey: 'recordid',
+            otherKey: 'teacherid'
+        });
+    }
 
     return record;
 };
