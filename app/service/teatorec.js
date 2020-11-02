@@ -29,16 +29,6 @@ class TeatorecService extends Service {
         )
     }
 
-    async showTeacherByTTR(params) {
-        const { ctx } = this
-        const { id } = params
-        console.log(id)
-        // let res = await ctx.model.TeaTOrec.findAll({
-        //     where:{
-
-        //     }
-        // })
-    }
 }
 
 module.exports = TeatorecService;

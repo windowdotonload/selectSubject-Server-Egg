@@ -163,8 +163,8 @@ class AdminController extends Controller {
 
     async showSelectTeacher() {
         const { ctx } = this
-        // console.log(ctx.query)
-        let res = await ctx.service.teatorec.showTeacherByTTR(ctx.query)
+        console.log(ctx.query)
+        let res = await ctx.service.teacher.showTeacherByTTR(ctx.query)
         ctx.body = {
             msg: 'showSelectTeacher'
         }

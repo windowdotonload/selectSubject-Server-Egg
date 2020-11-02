@@ -41,6 +41,21 @@ class TeacherController extends Controller {
             data: res
         }
     }
+
+    // 连表查询选择的教师
+    // async showTeacherByTTR(params) {
+    //     const { ctx } = this
+    //     const { id } = params
+    //     console.log(id)
+    //     let result = await ctx.model.Teacher.findAll({
+    //         include: {
+    //             model: ctx.model.Record,
+    //             where: {
+    //                 id: 9
+    //             }
+    //         }
+    //     })
+    // }
 }
 
 module.exports = TeacherController;
