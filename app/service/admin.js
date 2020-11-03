@@ -42,11 +42,15 @@ class AdminService extends Service {
         return res
     }
 
-    async addStuData(params) {
+    async addStuData(params, id) {
         const { ctx } = this
+        // console.log('-------------')
         // console.log(params)
-        const recordto = params.recordto
+        // console.log('-------------')
 
+        const recordto = id
+        // 某一学生可能因为特殊情况延期毕业，参加了两次毕业设计，所以学生表中同一个学生可能会出现多次
+        // 但只要保证的是 [当前记录下] 不会有两条相同的学生信息，即不能有两条studentnumber和rocordto都相同的数据
         params.forEach(async (item) => {
             // console.log(item)
             const {
@@ -66,7 +70,8 @@ class AdminService extends Service {
 
             let exit = await ctx.model.Student.findOne({
                 where: {
-                    studentnumber
+                    studentnumber,
+                    recordto
                 }
             });
 
@@ -85,7 +90,8 @@ class AdminService extends Service {
                     ethnic_groups,
                     select_teacher,
                     select_subject,
-                    recordto
+                    recordto,
+                    status: 1
                 });
                 // console.log(res)
             } else {

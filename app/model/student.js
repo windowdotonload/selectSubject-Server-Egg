@@ -21,7 +21,8 @@ module.exports = app => {
         ethnic_groups: STRING,
         select_teacher: STRING,
         select_subject: STRING,
-        recordto: INTEGER
+        recordto: INTEGER,
+        status: INTEGER
     }, {
         tableName: 'student'
     });

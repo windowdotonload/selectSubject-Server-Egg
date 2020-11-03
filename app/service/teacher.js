@@ -9,7 +9,7 @@ class TeacherService extends Service {
         const { ctx } = this
         console.log(params)
         const { username, password, teachername, specialized_subject, phonenumber, tecentqnumber, professional } = params
-        let res = await ctx.model.Teacher.create({ username, password: md5(password), teachername, specialized_subject, phonenumber, tecentqnumber, professional })
+        let res = await ctx.model.Teacher.create({ username, password: md5(password), teachername, specialized_subject, phonenumber, tecentqnumber, professional, status: 1 })
         return res
     }
 
@@ -19,6 +19,9 @@ class TeacherService extends Service {
         const res = await ctx.model.Teacher.findAndCountAll({
             limit: Number(pagesize),
             offset: (Number(pagenumber) - 1) * Number(pagesize),
+            where: {
+                status: 1
+            }
         });
         return res
     }

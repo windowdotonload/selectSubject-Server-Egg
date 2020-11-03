@@ -16,6 +16,7 @@ module.exports = app => {
         ethnic_groups: STRING,
         select_teacher: STRING,
         select_subject: STRING,
-        record: STRING
+        recordto: STRING,
+        status: INTEGER
     };
 };

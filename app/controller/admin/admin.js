@@ -66,6 +66,7 @@ class AdminController extends Controller {
         }
     }
 
+    // 标记学生对应的记录信息的id
     static recordid = 0
     async addRecordId() {
         const { ctx } = this
@@ -89,10 +90,9 @@ class AdminController extends Controller {
             const workbook = xlsx.readFile(file.filepath);
             // 直接转化为json
             let data = xlsx.utils.sheet_to_json(workbook.Sheets.Sheet1)
-            data.recordto = AdminController.recordid
             if (data) {
                 // console.log(data)
-                await ctx.service.admin.addStuData(data)
+                await ctx.service.admin.addStuData(data, AdminController.recordid)
                 AdminController.fileUploadStatus = {
                     status: 0,
                     msg: "文件上传成功",
