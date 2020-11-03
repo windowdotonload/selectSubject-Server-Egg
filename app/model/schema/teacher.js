@@ -9,5 +9,9 @@ module.exports = app => {
         teachername: STRING,
         specialized_subject: STRING,
         titlenumber: INTEGER,
+        phonenumber: STRING,
+        tecentqnumber: STRING,
+        professional: STRING,
+        status: INTEGER
     };
 };

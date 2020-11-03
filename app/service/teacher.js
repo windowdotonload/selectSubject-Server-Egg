@@ -7,9 +7,9 @@ const Service = require('egg').Service;
 class TeacherService extends Service {
     async addTea(params) {
         const { ctx } = this
-        // console.log(params)
-        const { username, password, teachername, specialized_subject } = params
-        let res = await ctx.model.Teacher.create({ username, password: md5(password), teachername, specialized_subject })
+        console.log(params)
+        const { username, password, teachername, specialized_subject, phonenumber, tecentqnumber, professional } = params
+        let res = await ctx.model.Teacher.create({ username, password: md5(password), teachername, specialized_subject, phonenumber, tecentqnumber, professional })
         return res
     }
 
