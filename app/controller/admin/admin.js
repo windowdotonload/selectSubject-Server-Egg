@@ -163,11 +163,34 @@ class AdminController extends Controller {
 
     async showSelectTeacher() {
         const { ctx } = this
-        console.log(ctx.query)
+        // console.log(ctx.query)
         let res = await ctx.service.teacher.showTeacherByTTR(ctx.query)
-        ctx.body = {
-            msg: 'showSelectTeacher'
+        if (res) {
+            ctx.body = {
+                msg: 'success',
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: 'error'
+            }
         }
+    }
+
+    async deleteSelectTeacher() {
+        const { ctx } = this
+        let res = await ctx.service.teatorec.deleteSelectTeacher(ctx.request.body)
+        if (res) {
+            ctx.body = {
+                msg: 'success',
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: 'error'
+            }
+        }
+
     }
 }
 

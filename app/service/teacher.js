@@ -34,6 +34,28 @@ class TeacherService extends Service {
         // console.log(res)
         return resEdit
     }
+
+    // 连表查询对应记录下选择的毕业设计教师
+    async showTeacherByTTR(params) {
+        const { ctx } = this
+        const { id } = params
+        // console.log(id)
+        // 根据当前创建的记录的id查找对应的老师信息
+        let result = await ctx.model.Teacher.findAll({
+            include: {
+                model: ctx.model.Record,
+                where: {
+                    id
+                }
+            }
+        })
+        // console.log('-----------')
+        // console.log(result)
+        // console.log('-----------')
+        return result
+    }
+
+
 }
 
 module.exports = TeacherService;

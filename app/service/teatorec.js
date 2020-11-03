@@ -3,6 +3,7 @@
 const Service = require('egg').Service;
 
 class TeatorecService extends Service {
+    // 关系表添加教师和每年的记录信息的数据
     async addTTR(params) {
         const { ctx } = this
         const { recordid, teacherid } = ctx.request.body
@@ -29,6 +30,19 @@ class TeatorecService extends Service {
         )
     }
 
+    async deleteSelectTeacher(params) {
+        const { ctx } = this
+        // console.log(params)
+        const { teacherid, recordid } = params
+        let rec = await ctx.model.TeaTOrec.findOne({
+            where: {
+                teacherid,
+                recordid
+            }
+        })
+        let res = await rec.destroy()
+        return res
+    }
 }
 
 module.exports = TeatorecService;
