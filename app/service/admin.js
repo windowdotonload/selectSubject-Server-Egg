@@ -41,7 +41,7 @@ class AdminService extends Service {
         // console.log('this.ctx   ', this.ctx)
         const { recordname, deadline, studentnumber, teachernumber } = params
         // 使用app.model和ctx.model都可以使用sequelize，但参考官方使用的ctx.model
-        const user = await ctx.model.Record.create({ recordname, deadline, studentnumber, teachernumber });
+        const user = await ctx.model.Record.create({ recordname, deadline, studentnumber, teachernumber, status: 1 });
         return user
     }
 

@@ -83,6 +83,18 @@ class TeacherService extends Service {
         return res
     }
 
+    async addTitleInfo(params) {
+        const { ctx } = this
+        const { title_name, title_description } = params
+        let res = await ctx.model.Title.create({ title_name, title_description, status: 0 })
+        return res
+    }
+
+    async showTitle(params) {
+        const { ctx } = this
+        let res = await ctx.model.Title.findAll()
+        return res
+    }
 }
 
 module.exports = TeacherService;
