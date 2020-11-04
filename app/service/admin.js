@@ -6,9 +6,16 @@ const md5 = require('md5');
 const Service = require('egg').Service;
 
 class AdminService extends Service {
-    async login(username, password) {
+    async login(username, password, loginType) {
         const { app } = this
-        let res = await app.mysql.get('admin', { username, password })
+        let res
+        if (loginType == 1) {
+            res = await app.mysql.get('admin', { username, password })
+        } else if (loginType == 2) {
+            res = await app.mysql.get('teacher', { username, password })
+        } else if (loginType == 3) {
+            res = await app.mysql.get('student', { username, password })
+        }
         return res
     }
 
@@ -36,6 +43,24 @@ class AdminService extends Service {
         // 使用app.model和ctx.model都可以使用sequelize，但参考官方使用的ctx.model
         const user = await ctx.model.Record.create({ recordname, deadline, studentnumber, teachernumber });
         return user
+    }
+
+    async editRecord(params) {
+        const { ctx } = this
+        // console.log(params)
+        const { id } = params
+        let editObj = {}
+        for (let i in params) {
+            if (i != 'id') {
+                if (params[i] != '') {
+                    editObj[i] = params[i]
+                }
+            }
+        }
+        // console.log('editObj', editObj)
+        let rec = await ctx.model.Record.findByPk(id)
+        let res = await rec.update(editObj)
+        return res
     }
 
     async deleteRecord(params) {

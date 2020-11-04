@@ -236,6 +236,21 @@ class AdminController extends Controller {
             }
         }
     }
+
+    async editRecord() {
+        const { ctx } = this
+        let res = await ctx.service.admin.editRecord(ctx.request.body)
+        if (res) {
+            ctx.body = {
+                msg: 'success',
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: 'error'
+            }
+        }
+    }
 }
 
 module.exports = AdminController;

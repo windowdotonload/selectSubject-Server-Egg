@@ -9,8 +9,10 @@ const Controller = require('egg').Controller;
 class LoginController extends Controller {
     async login() {
         const { ctx, app } = this
-        const { userName, passWord } = ctx.request.body
-        let res = await ctx.service.admin.login(userName, md5(passWord))
+        // console.log(ctx.request.body)
+        const { userName, passWord, loginType } = ctx.request.body
+        // loginType: 1-教务 2-老师 3-学生
+        let res = await ctx.service.admin.login(userName, md5(passWord), loginType)
         if (res) {
             // 在登录时如果账号和密码正确启用jwt颁发一个token令牌，返回给客户端，以此在中间件中进行后续接口认证
             let token = jwt.sign({ id: res.id, username: res.username }, 'this is sign', {
