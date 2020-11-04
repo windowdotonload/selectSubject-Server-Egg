@@ -48,6 +48,9 @@ class TeacherController extends Controller {
 
     }
 
+    async addTitleInfo() {
+        const { ctx } = this
+    }
 
 }
 
