@@ -192,6 +192,50 @@ class AdminController extends Controller {
         }
 
     }
+
+    async submitEditStudent() {
+        const { ctx } = this
+        let res = await ctx.service.admin.editStu(ctx.request.body)
+        if (res) {
+            ctx.body = {
+                msg: 'success'
+            }
+        } else {
+            ctx.body = {
+                msg: 'error'
+            }
+        }
+    }
+
+    async deleteStudent() {
+        const { ctx } = this
+        let res = await ctx.service.admin.deleteStu(ctx.request.body)
+        if (res) {
+            ctx.body = {
+                msg: 'success',
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: 'error'
+            }
+        }
+    }
+
+    async deleteTeacher() {
+        const { ctx } = this
+        let res = await ctx.service.teacher.deleteTeacher(ctx.request.body)
+        if (res) {
+            ctx.body = {
+                msg: 'success',
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: 'error'
+            }
+        }
+    }
 }
 
 module.exports = AdminController;

@@ -7,6 +7,7 @@ module.exports = app => {
         recordname: STRING,
         deadline: DATE,
         studentnumber: INTEGER,
-        teachernumber: INTEGER
+        teachernumber: INTEGER,
+        status: INTEGER
     };
 };

@@ -22,4 +22,7 @@ module.exports = app => {
   router.post('/editTeacher', controller.teacher.teacher.editTeacher)
   router.get('/showSelectTeacher', controller.admin.admin.showSelectTeacher)
   router.post('/deleteSelectTeacher', controller.admin.admin.deleteSelectTeacher)
+  router.post('/submitEditStudent', controller.admin.admin.submitEditStudent)
+  router.post('/deleteStudent', controller.admin.admin.deleteStudent)
+  router.post('/deleteTeacher', controller.admin.admin.deleteTeacher)
 };

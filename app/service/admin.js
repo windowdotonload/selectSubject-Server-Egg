@@ -20,7 +20,10 @@ class AdminService extends Service {
         // console.log(pagesize, pagenumber)
         const user = await ctx.model.Record.findAndCountAll({
             limit: Number(pagesize),
-            offset: (Number(pagenumber) - 1) * Number(pagesize)
+            offset: (Number(pagenumber) - 1) * Number(pagesize),
+            where: {
+                status: 1
+            }
         });
         return user
     }
@@ -38,7 +41,8 @@ class AdminService extends Service {
     async deleteRecord(params) {
         const { app, ctx } = this
         const { id } = params
-        const res = await app.mysql.delete('record', { id })
+        const rec = await ctx.model.Record.findByPk(id)
+        let res = await rec.update({ status: 0 })
         return res
     }
 
@@ -108,12 +112,40 @@ class AdminService extends Service {
             limit: Number(pagesize),
             offset: (Number(pagenumber) - 1) * Number(pagesize),
             where: {
-                recordto: recordid
+                recordto: recordid,
+                status: 1
             }
         });
         return res
     }
 
+    async editStu(params) {
+        const { ctx } = this
+        // console.log(params)
+        const { id, password, select_teacher } = params
+        let stu = await ctx.model.Student.findByPk(id)
+
+        // console.log(password == '')
+        // console.log(select_teacher == '')
+        let res
+        if (password == '') {
+            res = await stu.update({ select_teacher })
+        } else if (select_teacher == '') {
+            res = await stu.update({ password: md5(String(password)) })
+        } else {
+            res = await stu.update({ password: md5(String(password)), select_teacher })
+        }
+        // console.log(res)
+        return res
+    }
+
+    async deleteStu(params) {
+        const { ctx } = this
+        const { id } = params
+        let stu = await ctx.model.Student.findByPk(id)
+        let res = stu.update({ status: 0 })
+        return res
+    }
 }
 
 module.exports = AdminService;

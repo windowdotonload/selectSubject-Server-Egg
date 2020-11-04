@@ -35,11 +35,17 @@ class TeacherController extends Controller {
     async editTeacher() {
         const { ctx } = this
         let res = await ctx.service.teacher.editTea(ctx.request.body)
-
-        ctx.body = {
-            msg: 'success',
-            data: res
+        if (res) {
+            ctx.body = {
+                msg: 'success',
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: 'error'
+            }
         }
+
     }
 
 

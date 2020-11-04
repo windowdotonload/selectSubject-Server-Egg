@@ -28,12 +28,26 @@ class TeacherService extends Service {
 
     async editTea(params) {
         const { ctx } = this
+        // console.log('----------')
         // console.log(params)
+        // console.log('----------')
+
         const { id, username, password, teachername, specialized_subject } = params
+        let editObj = {}
+        for (let i in params) {
+            if (params[i] != '') {
+                if (i == 'password') {
+                    editObj[i] = md5(params[i])
+                } else {
+                    editObj[i] = params[i]
+                }
+            }
+        }
+        // console.log(editObj)
         let res = await ctx.model.Teacher.findOne({
             where: { id }
         })
-        let resEdit = await res.update({ username, password: md5(password), teachername, specialized_subject })
+        let resEdit = await res.update(editObj)
         // console.log(res)
         return resEdit
     }
@@ -45,6 +59,9 @@ class TeacherService extends Service {
         // console.log(id)
         // 根据当前创建的记录的id查找对应的老师信息
         let result = await ctx.model.Teacher.findAll({
+            where: {
+                status: 1
+            },
             include: {
                 model: ctx.model.Record,
                 where: {
@@ -58,6 +75,13 @@ class TeacherService extends Service {
         return result
     }
 
+    async deleteTeacher(params) {
+        const { ctx } = this
+        const { id } = params
+        let tea = await ctx.model.Teacher.findByPk(id)
+        let res = await tea.update({ status: 0 })
+        return res
+    }
 
 }
 
