@@ -85,8 +85,8 @@ class TeacherService extends Service {
 
     async addTitleInfo(params) {
         const { ctx } = this
-        const { title_name, title_description } = params
-        let res = await ctx.model.Title.create({ title_name, title_description, status: 0 })
+        const { title_name, title_description, id } = params
+        let res = await ctx.model.Title.create({ title_name, title_description, status: 0, teacherid: id })
         return res
     }
 
@@ -110,6 +110,14 @@ class TeacherService extends Service {
         // console.log(editObj)
         let tit = await ctx.model.Title.findByPk(id)
         let res = await tit.update(editObj)
+        return res
+    }
+
+    async deleteTitle(params) {
+        const { ctx } = this
+        const { id } = params
+        let tit = await ctx.model.Title.findByPk(id)
+        let res = await tit.destroy()
         return res
     }
 }
