@@ -77,6 +77,23 @@ class TeacherController extends Controller {
             }
         }
     }
+
+    async editTitle() {
+        const { ctx } = this
+        // console.log(ctx.request.body)
+        let res = await ctx.service.teacher.editTitle(ctx.request.body)
+        // console.log(res)
+        if (res) {
+            ctx.body = {
+                msg: "success",
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: 'error'
+            }
+        }
+    }
 }
 
 module.exports = TeacherController;

@@ -95,6 +95,23 @@ class TeacherService extends Service {
         let res = await ctx.model.Title.findAll()
         return res
     }
+
+    async editTitle(params) {
+        const { ctx } = this
+        const { id } = params
+        let editObj = {}
+        for (let i in params) {
+            if (i != 'id') {
+                if (params[i] != '') {
+                    editObj[i] = params[i]
+                }
+            }
+        }
+        // console.log(editObj)
+        let tit = await ctx.model.Title.findByPk(id)
+        let res = await tit.update(editObj)
+        return res
+    }
 }
 
 module.exports = TeacherService;

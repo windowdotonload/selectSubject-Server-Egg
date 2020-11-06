@@ -28,4 +28,5 @@ module.exports = app => {
   router.post('/editRecord', controller.admin.admin.editRecord)
   router.post('/addTitleInfo', controller.teacher.teacher.addTitleInfo)
   router.get('/showTitle', controller.teacher.teacher.showTitle)
+  router.post('/editTitle', controller.teacher.teacher.editTitle)
 };
