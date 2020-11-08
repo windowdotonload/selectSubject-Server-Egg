@@ -251,6 +251,21 @@ class AdminController extends Controller {
             }
         }
     }
+
+    async overRecord() {
+        const { ctx } = this
+        let res = await ctx.service.admin.overRecord(ctx.request.body)
+        if (res) {
+            ctx.body = {
+                msg: "success",
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: "error"
+            }
+        }
+    }
 }
 
 module.exports = AdminController;

@@ -28,9 +28,6 @@ class AdminService extends Service {
         const user = await ctx.model.Record.findAndCountAll({
             limit: Number(pagesize),
             offset: (Number(pagenumber) - 1) * Number(pagesize),
-            where: {
-                status: 1
-            }
         });
         return user
     }
@@ -60,6 +57,14 @@ class AdminService extends Service {
         // console.log('editObj', editObj)
         let rec = await ctx.model.Record.findByPk(id)
         let res = await rec.update(editObj)
+        return res
+    }
+
+    async overRecord(params) {
+        const { ctx } = this
+        const { id } = params
+        const rec = await ctx.model.Record.findByPk(id)
+        const res = await rec.update({ status: 0 })
         return res
     }
 

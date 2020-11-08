@@ -12,6 +12,7 @@ module.exports = app => {
   router.post('/addRecord', controller.admin.admin.addRecord)
   router.get('/getRecord', controller.admin.admin.getRecord)
   router.post('/deleteRecord', controller.admin.admin.deleteRecord)
+  router.post('/overRecord', controller.admin.admin.overRecord)
   router.post('/receiveFile', controller.admin.admin.receiveFile)
   router.get('/checkUploadStatus', controller.admin.admin.checkUploadStatus)
   router.get('/showStudent', controller.admin.admin.showStudent)
