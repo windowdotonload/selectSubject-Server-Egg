@@ -109,6 +109,21 @@ class TeacherController extends Controller {
             }
         }
     }
+
+    async searchSimilarTitleName() {
+        const { ctx } = this
+        let res = await ctx.service.teacher.searchSimilarTitleName(ctx.query)
+        if (res) {
+            ctx.body = {
+                msg: 'success',
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: "error"
+            }
+        }
+    }
 }
 
 module.exports = TeacherController;

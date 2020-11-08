@@ -10,3 +10,8 @@ exports.sequelize = {
   enable: true,
   package: 'egg-sequelize',
 };
+
+exports.elasticsearch = {
+  enable: true,
+  package: 'egg-es',
+};

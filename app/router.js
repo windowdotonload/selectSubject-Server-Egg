@@ -31,4 +31,5 @@ module.exports = app => {
   router.get('/showTitle', controller.teacher.teacher.showTitle)
   router.post('/editTitle', controller.teacher.teacher.editTitle)
   router.post('/deleteTitle', controller.teacher.teacher.deleteTitle)
+  router.get('/searchSimilarTitleName', controller.teacher.teacher.searchSimilarTitleName)
 };

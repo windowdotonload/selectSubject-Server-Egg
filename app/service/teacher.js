@@ -84,9 +84,15 @@ class TeacherService extends Service {
     }
 
     async addTitleInfo(params) {
-        const { ctx } = this
+        const { ctx, app } = this
         const { title_name, title_description, id } = params
         let res = await ctx.model.Title.create({ title_name, title_description, status: 0, teacherid: id })
+        const addRes = await app.elasticsearch.bulk({
+            body: [
+                { index: { _index: 'title' } },
+                { content: title_name, uptime: new Date() }
+            ]
+        })
         return res
     }
 
@@ -119,6 +125,38 @@ class TeacherService extends Service {
         let tit = await ctx.model.Title.findByPk(id)
         let res = await tit.destroy()
         return res
+    }
+
+    async searchSimilarTitleName(params) {
+        const { ctx, app } = this
+        // console.log(params)
+        const { title } = params
+        const res = await app.elasticsearch.search({
+            index: 'title',
+            // from: 20,   //分页
+            // size: 10,
+            body: {
+                query: {
+                    match: {
+                        content: title
+                    }
+                },
+                highlight: {
+                    pre_tags: ["<h1 style='margin:5px;margin-top:-2px'>"],
+                    post_tags: ["</h1>"],
+                    fields: {
+                        content: {}
+                    }
+                }
+            }
+        }, {
+            ignore: [404],
+            maxRetries: 3
+        })
+        // console.log('res is  ', res)
+        // console.log(res.data.hits.hits)
+        return res
+
     }
 }
 

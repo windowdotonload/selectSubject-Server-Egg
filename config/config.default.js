@@ -66,6 +66,11 @@ module.exports = appInfo => {
       return true;
     },
   };
+  // 配置全文搜索引擎
+  config.elasticsearch = {
+    host: 'localhost:9200',
+    apiVersion: '7.x'
+  }
   // add your middleware config here
   config.middleware = ['auth'];
 
