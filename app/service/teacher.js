@@ -86,19 +86,31 @@ class TeacherService extends Service {
     async addTitleInfo(params) {
         const { ctx, app } = this
         const { title_name, title_description, id } = params
-        let res = await ctx.model.Title.create({ title_name, title_description, status: 0, teacherid: id })
         const addRes = await app.elasticsearch.bulk({
             body: [
                 { index: { _index: 'title' } },
                 { content: title_name, uptime: new Date() }
             ]
         })
+        // console.log(addRes.items[0].index._id)
+        let res = await ctx.model.Title.create({ title_name, title_description, status: 0, teacherid: id, elasticsearchid: addRes.items[0].index._id })
+        // console.log(addRes)
+        // res.dataValues.addRes = addRes
+        // console.log('res is ', res)
         return res
     }
 
     async showTitle(params) {
         const { ctx } = this
-        let res = await ctx.model.Title.findAll()
+        const { id } = params
+        // console.log('id is ', id)
+        let res = await ctx.model.Title.findAll(
+            {
+                where: {
+                    teacherid: id
+                }
+            }
+        )
         return res
     }
 
@@ -120,9 +132,17 @@ class TeacherService extends Service {
     }
 
     async deleteTitle(params) {
-        const { ctx } = this
+        const { ctx, app } = this
         const { id } = params
         let tit = await ctx.model.Title.findByPk(id)
+        // console.log('tit is  ', tit)
+        console.log('elsticsearchid is is ', tit.dataValues.elasticsearchid)
+        const deleteRes = await app.elasticsearch.bulk({
+            body: [
+                { delete: { _index: 'title', _id: tit.dataValues.elasticsearchid } },
+            ]
+        })
+        console.log('deleteRes is ', deleteRes)
         let res = await tit.destroy()
         return res
     }

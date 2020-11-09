@@ -65,7 +65,7 @@ class TeacherController extends Controller {
 
     async showTitle() {
         const { ctx } = this
-        let res = await ctx.service.teacher.showTitle()
+        let res = await ctx.service.teacher.showTitle(ctx.query)
         if (res) {
             ctx.body = {
                 msg: 'success',
