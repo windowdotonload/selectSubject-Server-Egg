@@ -22,7 +22,8 @@ module.exports = app => {
         select_teacher: STRING,
         select_subject: STRING,
         recordto: INTEGER,
-        status: INTEGER
+        status: INTEGER,
+        teacherid: INTEGER,
     }, {
         tableName: 'student'
     });

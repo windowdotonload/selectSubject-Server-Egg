@@ -17,6 +17,7 @@ module.exports = app => {
         select_teacher: STRING,
         select_subject: STRING,
         recordto: STRING,
-        status: INTEGER
+        status: INTEGER,
+        teacherid: INTEGER,
     };
 };
