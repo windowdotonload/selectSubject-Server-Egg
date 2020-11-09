@@ -176,7 +176,36 @@ class TeacherService extends Service {
         // console.log('res is  ', res)
         // console.log(res.data.hits.hits)
         return res
+    }
 
+    async showAllStudentCanSelectTeacher(params) {
+        const { ctx } = this
+        const { recordid } = params
+        let res = await ctx.model.Teacher.findAll({
+            where: {
+                status: 1
+            },
+            include: {
+                model: ctx.model.Record,
+                where: {
+                    id: recordid,
+                    status: 1
+                }
+            }
+        })
+        return res
+    }
+
+    async showSelectTeacherTitle(params) {
+        const { ctx } = this
+        const { id } = params
+        let res = await ctx.model.Title.findAll({
+            where: {
+                teacherid: id,
+                status: 0
+            }
+        })
+        return res
     }
 }
 

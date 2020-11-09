@@ -32,4 +32,8 @@ module.exports = app => {
   router.post('/editTitle', controller.teacher.teacher.editTitle)
   router.post('/deleteTitle', controller.teacher.teacher.deleteTitle)
   router.get('/searchSimilarTitleName', controller.teacher.teacher.searchSimilarTitleName)
+  router.get('/showAllStudentCanSelectTeacher', controller.student.student.showAllStudentCanSelectTeacher)
+  router.get('/showSelectTeacherTitle', controller.student.student.showSelectTeacherTitle)
+  router.post('/saveTeacherId', controller.student.student.saveTeacherId)
+  router.get("/createdShowSelectTeacherId", controller.student.student.createdShowSelectTeacherId)
 };
