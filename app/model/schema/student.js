@@ -19,5 +19,6 @@ module.exports = app => {
         recordto: STRING,
         status: INTEGER,
         teacherid: INTEGER,
+        canselect: INTEGER
     };
 };

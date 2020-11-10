@@ -50,8 +50,53 @@ class StudentController extends Controller {
 
     async createdShowSelectTeacherId() {
         const { ctx } = this
-        let res = await ctx.service.setudent.createdShowSelectTeacherId(ctx.query)
-        if (res.msg === 'success') {
+        let res = await ctx.service.student.createdShowSelectTeacherId(ctx.query)
+        if (res) {
+            ctx.body = {
+                msg: 'success',
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: "error"
+            }
+        }
+    }
+
+    async stuGetSelectTeacherName() {
+        const { ctx } = this
+        let res = await ctx.service.student.stuGetSelectTeacherName(ctx.query)
+        if (res) {
+            ctx.body = {
+                msg: 'success',
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: 'error'
+            }
+        }
+    }
+
+    async confirmSelectTeacher() {
+        const { ctx } = this
+        let res = await ctx.service.student.confirmSelectTeacher(ctx.request.body)
+        if (res) {
+            ctx.body = {
+                msg: 'success',
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: "error"
+            }
+        }
+    }
+
+    async getStuInfo() {
+        const { ctx } = this
+        let res = await ctx.service.student.getStuInfo(ctx.query)
+        if (res) {
             ctx.body = {
                 msg: 'success',
                 data: res
