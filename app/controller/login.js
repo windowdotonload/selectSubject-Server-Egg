@@ -26,7 +26,7 @@ class LoginController extends Controller {
             }
         } else {
             ctx.body = {
-                msg: "账号或密码错误"
+                msg: "账号或密码错误或已失去登录权限"
             }
         }
     }

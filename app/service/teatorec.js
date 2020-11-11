@@ -23,7 +23,13 @@ class TeatorecService extends Service {
                 // console.log('!exist is ', !exist)
                 if (!exist) {
                     let res = await ctx.model.TeaTOrec.create({ recordid, teacherid: item })
-                    console.log(res)
+                    let tea = await ctx.model.Teacher.findByPk({
+                        id: teacherid
+                    })
+                    await tea.update({
+                        loginauth: 1
+                    })
+                    // console.log(res)
                     return res
                 }
             })

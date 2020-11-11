@@ -12,9 +12,9 @@ class AdminService extends Service {
         if (loginType == 1) {
             res = await app.mysql.get('admin', { username, password })
         } else if (loginType == 2) {
-            res = await app.mysql.get('teacher', { username, password })
+            res = await app.mysql.get('teacher', { username, password, loginauth: 1 })
         } else if (loginType == 3) {
-            res = await app.mysql.get('student', { username, password })
+            res = await app.mysql.get('student', { username, password, loginauth: 1 })
         }
         return res
     }
@@ -65,6 +65,39 @@ class AdminService extends Service {
         const { id } = params
         const rec = await ctx.model.Record.findByPk(id)
         const res = await rec.update({ status: 0 })
+        let stu = await ctx.model.Student.findAll({
+            where: {
+                status: 1,
+                recordto: id
+            }
+        })
+        // console.log('stu is   ', stu)
+        let tea = await ctx.model.Teacher.findAll({
+            where: {
+                status: 1,
+            },
+            include: {
+                model: ctx.model.Record,
+                where: {
+                    id
+                }
+            }
+        })
+        // console.log('---- tea is   ', tea)
+        stu.forEach(async item => {
+            let id = item.dataValues.id
+            let stu = await ctx.model.Student.findByPk(id)
+            await stu.update({
+                loginauth: 0
+            })
+        })
+        tea.forEach(async item => {
+            let id = item.dataValues.id
+            let tea = await ctx.model.Teacher.findByPk(id)
+            await tea.update({
+                loginauth: 0
+            })
+        })
         return res
     }
 
@@ -125,7 +158,8 @@ class AdminService extends Service {
                     select_teacher,
                     select_subject,
                     recordto,
-                    status: 1
+                    status: 1,
+                    loginauth: 1
                 });
                 // console.log(res)
             } else {

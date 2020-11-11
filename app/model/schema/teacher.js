@@ -12,6 +12,7 @@ module.exports = app => {
         phonenumber: STRING,
         tecentqnumber: STRING,
         professional: STRING,
-        status: INTEGER
+        status: INTEGER,
+        loginauth: INTEGER
     };
 };

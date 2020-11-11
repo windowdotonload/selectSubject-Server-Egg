@@ -24,7 +24,8 @@ module.exports = app => {
         recordto: INTEGER,
         status: INTEGER,
         teacherid: INTEGER,
-        canselect: INTEGER
+        canselect: INTEGER,
+        loginauth: INTEGER
     }, {
         tableName: 'student'
     });
