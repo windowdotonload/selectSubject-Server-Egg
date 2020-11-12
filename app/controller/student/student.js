@@ -107,6 +107,36 @@ class StudentController extends Controller {
             }
         }
     }
+
+    async confirmStudentSelTitle() {
+        const { ctx } = this
+        let res = await ctx.service.student.confirmStudentSelTitle(ctx.request.body)
+        if (res) {
+            ctx.body = {
+                msg: "success",
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: "error"
+            }
+        }
+    }
+
+    async getStudentSelTitleInfo() {
+        const { ctx } = this
+        let res = await ctx.service.student.getStudentSelTitleInfo(ctx.query)
+        if (res) {
+            ctx.body = {
+                msg: "success",
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: 'error'
+            }
+        }
+    }
 }
 
 module.exports = StudentController;

@@ -55,6 +55,31 @@ class StudentService extends Service {
         let res = await ctx.model.Student.findByPk(id)
         return res
     }
+
+    async confirmStudentSelTitle(params) {
+        const { ctx } = this
+        const { stuid, titleid, titlename } = params
+
+        let stu = await ctx.model.Student.findByPk(stuid)
+        let res = await stu.update({
+            titleid,
+            select_subject: titlename,
+            select_title_status: 1,
+        })
+        return res
+    }
+
+    async getStudentSelTitleInfo(params) {
+        const { ctx } = this
+        const { id } = params
+
+        let stu = await ctx.model.Student.findByPk(id)
+        // console.log(stu.dataValues)
+        if (stu.dataValues.titleid) {
+            let res = await ctx.model.Title.findByPk(stu.dataValues.titleid)
+            return res
+        }
+    }
 }
 
 module.exports = StudentService;
