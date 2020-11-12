@@ -136,13 +136,13 @@ class TeacherService extends Service {
         const { id } = params
         let tit = await ctx.model.Title.findByPk(id)
         // console.log('tit is  ', tit)
-        console.log('elsticsearchid is is ', tit.dataValues.elasticsearchid)
+        // console.log('elsticsearchid is is ', tit.dataValues.elasticsearchid)
         const deleteRes = await app.elasticsearch.bulk({
             body: [
                 { delete: { _index: 'title', _id: tit.dataValues.elasticsearchid } },
             ]
         })
-        console.log('deleteRes is ', deleteRes)
+        // console.log('deleteRes is ', deleteRes)
         let res = await tit.destroy()
         return res
     }
@@ -202,7 +202,7 @@ class TeacherService extends Service {
         let res = await ctx.model.Title.findAll({
             where: {
                 teacherid: id,
-                status: 0
+                // status: 0
             }
         })
         return res

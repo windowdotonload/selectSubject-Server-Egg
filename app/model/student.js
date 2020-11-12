@@ -27,7 +27,10 @@ module.exports = app => {
         status: INTEGER,
         teacherid: INTEGER,
         canselect: INTEGER,
-        loginauth: INTEGER
+        loginauth: INTEGER,
+        ifcustom: INTEGER,
+        title_name: STRING,
+        title_description: STRING
     }, {
         tableName: 'student'
     });

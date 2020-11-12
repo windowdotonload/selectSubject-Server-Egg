@@ -23,5 +23,8 @@ module.exports = app => {
         teacherid: INTEGER,
         canselect: INTEGER,
         loginauth: INTEGER,
+        ifcustom: INTEGER,
+        title_name: STRING,
+        title_description: STRING
     };
 };
