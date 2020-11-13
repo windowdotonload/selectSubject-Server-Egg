@@ -241,7 +241,8 @@ class TeacherService extends Service {
         let titleid = stu.dataValues.titleid
         let tit = await ctx.model.Title.findByPk(titleid)
         let titres = await tit.update({ status: 0 })
-        return [stures, titres]
+        let resArr = [stures, titres]
+        return resArr
     }
 }
 
