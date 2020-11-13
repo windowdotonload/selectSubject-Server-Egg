@@ -222,11 +222,25 @@ class TeacherService extends Service {
     async passStudentSelTitle(params) {
         const { ctx } = this
         const { id } = params
+
         let stu = await ctx.model.Student.findByPk(id)
         let stures = await stu.update({ select_title_status: 2 })
         let titleid = stu.dataValues.titleid
         let tit = await ctx.model.Title.findByPk(titleid)
         let titres = await tit.update({ status: 2 })
+        return [stures, titres]
+
+    }
+
+    async refuseStudentSelTitle(params) {
+        const { ctx } = this
+        const { id } = params
+        let stu = await ctx.model.Student.findByPk(id)
+        // 老师将一个学生的选题退回，学生选题状态变为被退回，而题目的状态直接可以变为待选择
+        let stures = await stu.update({ select_title_status: 4 })
+        let titleid = stu.dataValues.titleid
+        let tit = await ctx.model.Title.findByPk(titleid)
+        let titres = await tit.update({ status: 0 })
         return [stures, titres]
     }
 }

@@ -97,6 +97,9 @@ class StudentService extends Service {
         const { id, title_name, title_description } = params
         let stu = await ctx.model.Student.findByPk(id)
         let res = await stu.update({
+            // 有一种情况为，学生先选择的老师出的题目，然后被退回，之后提交自定义选择题，此时要吧之前的学生表中的select_subject和titleid清空
+            select_subject: '',
+            titleid: null,
             ifcustom: 1,
             title_name,
             title_description,

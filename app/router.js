@@ -45,4 +45,5 @@ module.exports = app => {
   router.post('/studentCustomTitle', controller.student.student.studentCustomTitle)
   router.get('/teaGetSelectStuInfo', controller.teacher.teacher.teaGetSelectStuInfo)
   router.post('/passStudentSelTitle', controller.teacher.teacher.passStudentSelTitle)
+  router.post('/refuseStudentSelTitle', controller.teacher.teacher.refuseStudentSelTitle)
 };
