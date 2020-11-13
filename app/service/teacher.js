@@ -207,6 +207,17 @@ class TeacherService extends Service {
         })
         return res
     }
+
+    async teaGetSelectStuInfo(params) {
+        const { ctx } = this
+        const { id } = params
+        let res = await ctx.model.Student.findAll({
+            where: {
+                teacherid: id
+            }
+        })
+        return res
+    }
 }
 
 module.exports = TeacherService;
