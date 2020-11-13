@@ -25,6 +25,7 @@ module.exports = app => {
         loginauth: INTEGER,
         ifcustom: INTEGER,
         title_name: STRING,
-        title_description: STRING
+        title_description: STRING,
+        custom_title_status: INTEGER,
     };
 };

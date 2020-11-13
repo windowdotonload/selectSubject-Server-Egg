@@ -42,4 +42,5 @@ module.exports = app => {
   router.post('/confirmStudentSelTitle', controller.student.student.confirmStudentSelTitle)
   router.get('/getStudentSelTitleInfo', controller.student.student.getStudentSelTitleInfo)
   router.post('/changeTitleStatus', controller.student.student.changeTitleStatus)
+  router.post('/studentCustomTitle', controller.student.student.studentCustomTitle)
 };

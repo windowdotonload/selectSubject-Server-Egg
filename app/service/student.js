@@ -91,6 +91,20 @@ class StudentService extends Service {
         })
         return res
     }
+
+    async studentCustomTitle(params) {
+        const { ctx } = this
+        const { id, title_name, title_description } = params
+        let stu = await ctx.model.Student.findByPk(id)
+        let res = await stu.update({
+            ifcustom: 1,
+            title_name,
+            title_description,
+            custom_title_status: 0,
+            select_title_status: 1
+        })
+        return res
+    }
 }
 
 module.exports = StudentService;
