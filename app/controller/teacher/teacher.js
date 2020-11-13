@@ -139,6 +139,21 @@ class TeacherController extends Controller {
             }
         }
     }
+
+    async passStudentSelTitle() {
+        const { ctx } = this
+        let res = await ctx.service.teacher.passStudentSelTitle(ctx.request.body)
+        if (res) {
+            ctx.body = {
+                msg: 'success',
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: 'error'
+            }
+        }
+    }
 }
 
 module.exports = TeacherController;

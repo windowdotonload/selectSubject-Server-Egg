@@ -218,6 +218,17 @@ class TeacherService extends Service {
         })
         return res
     }
+
+    async passStudentSelTitle(params) {
+        const { ctx } = this
+        const { id } = params
+        let stu = await ctx.model.Student.findByPk(id)
+        let stures = await stu.update({ select_title_status: 2 })
+        let titleid = stu.dataValues.titleid
+        let tit = await ctx.model.Title.findByPk(titleid)
+        let titres = await tit.update({ status: 2 })
+        return [stures, titres]
+    }
 }
 
 module.exports = TeacherService;
