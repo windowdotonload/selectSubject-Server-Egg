@@ -32,6 +32,7 @@ module.exports = app => {
         title_name: STRING,
         title_description: STRING,
         custom_title_status: INTEGER,
+        change_title_number: INTEGER,
     }, {
         tableName: 'student'
     });
