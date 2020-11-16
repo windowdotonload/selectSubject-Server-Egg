@@ -244,6 +244,18 @@ class TeacherService extends Service {
         let resArr = [stures, titres]
         return resArr
     }
+
+    async teacherSubmitScore(params) {
+        const { ctx } = this
+        const { id, score } = params
+        // console.log(id)
+        let stu = await ctx.model.Student.findByPk(id)
+        let res = await stu.update({
+            score
+        })
+        // console.log(res)
+        return res
+    }
 }
 
 module.exports = TeacherService;

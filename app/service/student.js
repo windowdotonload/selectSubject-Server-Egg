@@ -108,6 +108,27 @@ class StudentService extends Service {
         })
         return res
     }
+
+    async stuChangeTitle(params) {
+        const { ctx } = this
+        const { id } = params
+        let stu = await ctx.model.Student.findByPk(id)
+        let titleid = stu.dataValues.titleid
+        let stures = await stu.update({
+            titleid: null,
+            select_subject: '',
+            select_title_status: 0,
+            title_name: '',
+            title_description: '',
+            change_title_number: 1
+        })
+        let tit = await ctx.model.Title.findByPk(titleid)
+        let titres = await tit.update({
+            status: 0,
+            studentid: null
+        })
+        return [stures, titres]
+    }
 }
 
 module.exports = StudentService;

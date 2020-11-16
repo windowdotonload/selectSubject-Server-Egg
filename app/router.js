@@ -1,3 +1,8 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+ */
 'use strict';
 
 /**
@@ -46,4 +51,6 @@ module.exports = app => {
   router.get('/teaGetSelectStuInfo', controller.teacher.teacher.teaGetSelectStuInfo)
   router.post('/passStudentSelTitle', controller.teacher.teacher.passStudentSelTitle)
   router.post('/refuseStudentSelTitle', controller.teacher.teacher.refuseStudentSelTitle)
+  router.post("/stuChangeTitle", controller.student.student.stuChangeTitle)
+  router.post('/teacherSubmitScore', controller.teacher.teacher.teacherSubmitScore)
 };
