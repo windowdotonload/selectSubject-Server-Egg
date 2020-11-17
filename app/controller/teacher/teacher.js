@@ -188,6 +188,23 @@ class TeacherController extends Controller {
             }
         }
     }
+
+    async teacherGetApplyHistory() {
+        const { ctx } = this
+
+        let res = await ctx.service.teacher.teacherGetApplyHistory(ctx.query)
+
+        if (res) {
+            ctx.body = {
+                msg: "success",
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: "error"
+            }
+        }
+    }
 }
 
 module.exports = TeacherController;

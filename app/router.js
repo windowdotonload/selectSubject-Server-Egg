@@ -53,4 +53,6 @@ module.exports = app => {
   router.post('/refuseStudentSelTitle', controller.teacher.teacher.refuseStudentSelTitle)
   router.post("/stuChangeTitle", controller.student.student.stuChangeTitle)
   router.post('/teacherSubmitScore', controller.teacher.teacher.teacherSubmitScore)
+  router.post('/recordChangeTitle', controller.student.student.recordChangeTitle)
+  router.get('/teacherGetApplyHistory', controller.teacher.teacher.teacherGetApplyHistory)
 };

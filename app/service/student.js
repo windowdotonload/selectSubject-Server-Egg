@@ -66,7 +66,11 @@ class StudentService extends Service {
             select_subject: titlename,
             select_title_status: 1,
         })
-        return res
+        let applyRes = await ctx.model.Applyhistory.create({
+            content: '申请题目',
+            studentid: stuid
+        })
+        return [res, applyRes]
     }
 
     async getStudentSelTitleInfo(params) {
@@ -128,6 +132,17 @@ class StudentService extends Service {
             studentid: null
         })
         return [stures, titres]
+    }
+
+    async recordChangeTitle(params) {
+        const { ctx } = this
+        const { id, titleid } = params
+        let tit = await ctx.model.Title.findByPk(titleid)
+        let res = await ctx.model.Applyhistory.create({
+            studentid: id,
+            content: `申请修改${tit.dataValues.title_name}选题`
+        })
+        return res
     }
 }
 
