@@ -3,13 +3,18 @@
  * @version: 
  * @Author: windowdotonload
  */
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+ */
 'use strict';
 
 /**
  * @param {Egg.Application} app - egg application
  */
 module.exports = app => {
-  const { router, controller } = app;
+  const { router, controller, io } = app;
   router.post('/', controller.home.index);
   router.get('/test', controller.test.index);
 
@@ -55,4 +60,6 @@ module.exports = app => {
   router.post('/teacherSubmitScore', controller.teacher.teacher.teacherSubmitScore)
   router.post('/recordChangeTitle', controller.student.student.recordChangeTitle)
   router.get('/teacherGetApplyHistory', controller.teacher.teacher.teacherGetApplyHistory)
+
+  io.of('/').route('server', io.controller.default.server);
 };

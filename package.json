@@ -13,9 +13,11 @@
     "egg-mysql": "^3.0.0",
     "egg-scripts": "^2.11.0",
     "egg-sequelize": "^6.0.0",
+    "egg-socket.io": "^4.1.6",
     "jsonwebtoken": "^8.5.1",
     "md5": "^2.3.0",
     "mysql2": "^2.2.5",
+    "vue-socket.io": "^3.0.10",
     "xlsx": "^0.16.8"
   },
   "devDependencies": {

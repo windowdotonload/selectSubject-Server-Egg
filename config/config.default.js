@@ -71,6 +71,16 @@ module.exports = appInfo => {
     host: 'localhost:9200',
     apiVersion: '7.x'
   }
+  // socket.io
+  config.io = {
+    init: {}, // passed to engine.io
+    namespace: {
+      '/': {
+        connectionMiddleware: [],
+        packetMiddleware: [],
+      },
+    },
+  };
   // add your middleware config here
   config.middleware = ['auth'];
 

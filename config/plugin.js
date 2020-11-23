@@ -1,3 +1,8 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+ */
 'use strict';
 
 /** @type Egg.EggPlugin */
@@ -14,4 +19,9 @@ exports.sequelize = {
 exports.elasticsearch = {
   enable: true,
   package: 'egg-es',
+};
+
+exports.io = {
+  enable: true,
+  package: 'egg-socket.io',
 };

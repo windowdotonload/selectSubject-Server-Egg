@@ -3,6 +3,11 @@
  * @version: 
  * @Author: windowdotonload
  */
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+ */
 'use strict';
 
 module.exports = app => {
@@ -34,5 +39,6 @@ module.exports = app => {
         custom_title_status: INTEGER,
         change_title_number: INTEGER,
         score: STRING,
+        sendmessage: INTEGER
     };
 };

@@ -3,6 +3,11 @@
  * @version: 
  * @Author: windowdotonload
  */
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+ */
 'use strict';
 
 const { sequelize } = require("../../config/plugin");
@@ -39,6 +44,7 @@ module.exports = app => {
         custom_title_status: INTEGER,
         change_title_number: INTEGER,
         score: STRING,
+        sendmessage: INTEGER
     }, {
         tableName: 'student'
     });
