@@ -197,6 +197,56 @@ class StudentController extends Controller {
             }
         }
     }
+
+    async recordIfStuSendMessage() {
+        const { ctx } = this
+
+        let res = await ctx.service.student.recordIfStuSendMessage(ctx.request.body)
+        if (res) {
+            ctx.body = {
+                msg: 'success',
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: 'error'
+            }
+        }
+    }
+
+    async showHistoryMessage() {
+        const { ctx } = this
+
+        let res = await ctx.service.student.showHistoryMessage(ctx.query)
+
+        if (res) {
+            ctx.body = {
+                msg: "success",
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: 'error'
+            }
+        }
+    }
+
+    async studentAlreadyReadMessage() {
+        const { ctx } = this
+
+        let res = await ctx.service.student.studentAlreadyReadMessage(ctx.request.body)
+
+        if (res) {
+            ctx.body = {
+                msg: "success",
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: 'error'
+            }
+        }
+    }
 }
 
 module.exports = StudentController;

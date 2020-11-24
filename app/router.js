@@ -8,6 +8,11 @@
  * @version: 
  * @Author: windowdotonload
  */
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+ */
 'use strict';
 
 /**
@@ -60,6 +65,11 @@ module.exports = app => {
   router.post('/teacherSubmitScore', controller.teacher.teacher.teacherSubmitScore)
   router.post('/recordChangeTitle', controller.student.student.recordChangeTitle)
   router.get('/teacherGetApplyHistory', controller.teacher.teacher.teacherGetApplyHistory)
+  router.post("/recordIfStuSendMessage", controller.student.student.recordIfStuSendMessage)
+  router.post('/teacherAlreadyReadMessage', controller.teacher.teacher.teacherAlreadyReadMessage)
+  router.get("/showHistoryMessage", controller.student.student.showHistoryMessage)
+  router.post('/remindStudentMessage', controller.teacher.teacher.remindStudentMessage)
+  router.post('/studentAlreadyReadMessage', controller.student.student.studentAlreadyReadMessage)
 
   io.of('/').route('server', io.controller.default.server);
 };

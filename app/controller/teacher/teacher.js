@@ -205,6 +205,40 @@ class TeacherController extends Controller {
             }
         }
     }
+
+    async teacherAlreadyReadMessage() {
+        const { ctx } = this
+
+        let res = await ctx.service.teacher.teacherAlreadyReadMessage(ctx.request.body)
+
+        if (res) {
+            ctx.body = {
+                msg: "success",
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: "error"
+            }
+        }
+    }
+
+    async remindStudentMessage() {
+        const { ctx } = this
+
+        let res = await ctx.service.teacher.remindStudentMessage(ctx.request.body)
+
+        if (res) {
+            ctx.body = {
+                msg: 'success',
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: 'error'
+            }
+        }
+    }
 }
 
 module.exports = TeacherController;

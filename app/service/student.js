@@ -144,6 +144,42 @@ class StudentService extends Service {
         })
         return res
     }
+
+    async recordIfStuSendMessage(params) {
+        const { ctx } = this
+        const { id } = params
+        let stu = await ctx.model.Student.findByPk(id)
+        let res = await stu.update({
+            sendmessage: 1
+        })
+        return res
+    }
+
+    async showHistoryMessage(params) {
+        const { ctx } = this
+        const { studentid, teacherid } = params
+
+        let res = await ctx.model.Recordmessage.findAll({
+            where: {
+                studentid,
+                teacherid
+            }
+        })
+        return res
+    }
+
+    async studentAlreadyReadMessage(params) {
+        const { ctx } = this
+        const { id } = params
+
+        let stu = await ctx.model.Student.findByPk(id)
+
+        let res = await stu.update({
+            receiveteamessage: 0
+        })
+
+        return res
+    }
 }
 
 module.exports = StudentService;

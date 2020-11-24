@@ -275,6 +275,32 @@ class TeacherService extends Service {
         })
         return applyres
     }
+
+    async teacherAlreadyReadMessage(params) {
+        const { ctx } = this
+
+        const { id } = params
+
+        let stu = await ctx.model.Student.findByPk(id)
+
+        let res = await stu.update({
+            sendmessage: 0
+        })
+        return res
+    }
+
+    async remindStudentMessage(params) {
+        const { ctx } = this
+        const { id } = params
+
+        let stu = await ctx.model.Student.findByPk(id)
+
+        let res = await stu.update({
+            receiveteamessage: 1
+        })
+
+        return res
+    }
 }
 
 module.exports = TeacherService;
