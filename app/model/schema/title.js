@@ -1,3 +1,8 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+ */
 'use strict';
 
 module.exports = app => {
@@ -9,6 +14,7 @@ module.exports = app => {
         status: INTEGER,
         elasticsearchid: STRING,
         teacherid: INTEGER,
-        studentid: INTEGER
+        studentid: INTEGER,
+        recordid: INTEGER,
     };
 };

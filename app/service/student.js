@@ -65,6 +65,7 @@ class StudentService extends Service {
             titleid,
             select_subject: titlename,
             select_title_status: 1,
+            ifcustom: 0
         })
         let applyRes = await ctx.model.Applyhistory.create({
             content: `申请${titlename}题目`,
@@ -110,6 +111,7 @@ class StudentService extends Service {
             custom_title_status: 0,
             select_title_status: 1
         })
+        // 可以多次更换选题,每次更换都可以自定义选题,每一次提交新的自定义选题都将之前的自定义题目的status置为0,
         let oldtitle = await ctx.model.Stucustomtitle.findAll({
             where: {
                 studentid: id
@@ -129,7 +131,16 @@ class StudentService extends Service {
             studentid: id,
             teacher_audit: 0
         })
-        return [res, customres]
+        // 将学生的titleid变更为自定义题目表中的id
+        await stu.update({
+            titleid: customres.dataValues.id
+        })
+        // 每一次自定义的题目也要加到,历史申请表中applyhistory表
+        let titRec = await ctx.model.Applyhistory.create({
+            content: `自定义题目${title_name}`,
+            studentid: id
+        })
+        return [res, customres, titRec]
     }
 
     async stuChangeTitle(params) {

@@ -1,3 +1,8 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+ */
 'use strict';
 
 module.exports = app => {
@@ -13,6 +18,7 @@ module.exports = app => {
         tecentqnumber: STRING,
         professional: STRING,
         status: INTEGER,
-        loginauth: INTEGER
+        loginauth: INTEGER,
+        current_record: INTEGER
     };
 };

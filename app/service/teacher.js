@@ -237,20 +237,41 @@ class TeacherService extends Service {
         const { id, titlename } = params
         let stu = await ctx.model.Student.findByPk(id)
         // 老师将一个学生的选题退回，学生选题状态变为被退回，而题目的状态直接可以变为待选择
+        // 这里只修改select_title_status而不修改其他字段，是为了可以在退回卡片上查到之前的题目信息，如果清空的话是查不到的
+        // 每次在选题之前都会update，所以没必要清空
         let stures = await stu.update({
-            titleid: null,
+            // titleid: null,
             select_title_status: 4,
-            select_subject: '',
-            title_name: '',
-            title_description: '',
+            // select_subject: '',
+            // title_name: '',
+            // title_description: '',
         })
         let titleid = stu.dataValues.titleid
-        let tit = await ctx.model.Title.findByPk(titleid)
-        let titres = await tit.update({ status: 0 })
-        let applyRes = await ctx.model.Applyhistory.create({
-            content: `选择${titlename}被退回`,
-            studentid: id
-        })
+        let titres
+        // 要判断学生是否是自定义的题目
+        if (stu.dataValues.ifcustom == 1) {
+            let tit = await ctx.model.Stucustomtitle.findByPk(titleid)
+            titres = await tit.update({
+                teacher_audit: 2
+            })
+        } else {
+            let tit = await ctx.model.Title.findByPk(titleid)
+            titres = await tit.update({ status: 0 })
+        }
+
+        let applyRes
+        if (stu.dataValues.ifcustom == 1) {
+            applyRes = await ctx.model.Applyhistory.create({
+                content: `自定义${titlename}被退回`,
+                studentid: id
+            })
+        } else {
+            applyRes = await ctx.model.Applyhistory.create({
+                content: `选择${titlename}被退回`,
+                studentid: id
+            })
+        }
+
         let resArr = [stures, titres, applyRes]
         return resArr
     }

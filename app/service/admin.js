@@ -210,6 +210,29 @@ class AdminService extends Service {
         let res = stu.update({ status: 0 })
         return res
     }
+
+    async checkUsernameExist(params) {
+        const { ctx } = this
+        const { username } = params
+
+        // console.log('username', username)
+
+        let res = await ctx.model.Teacher.findAll({
+            where: {
+                username
+            }
+        })
+        // console.log('res', res)
+        if (res.length != 0) {
+            return {
+                msg: 'exist'
+            }
+        } else {
+            return {
+                msg: "can create"
+            }
+        }
+    }
 }
 
 module.exports = AdminService;
