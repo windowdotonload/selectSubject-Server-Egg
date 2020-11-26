@@ -237,7 +237,13 @@ class TeacherService extends Service {
         const { id, titlename } = params
         let stu = await ctx.model.Student.findByPk(id)
         // 老师将一个学生的选题退回，学生选题状态变为被退回，而题目的状态直接可以变为待选择
-        let stures = await stu.update({ select_title_status: 4 })
+        let stures = await stu.update({
+            titleid: null,
+            select_title_status: 4,
+            select_subject: '',
+            title_name: '',
+            title_description: '',
+        })
         let titleid = stu.dataValues.titleid
         let tit = await ctx.model.Title.findByPk(titleid)
         let titres = await tit.update({ status: 0 })
@@ -300,6 +306,35 @@ class TeacherService extends Service {
         })
 
         return res
+    }
+
+    async teacherAuditCustomTitle(params) {
+        const { ctx } = this
+        const { id } = params
+
+
+        let customTit = await ctx.model.Stucustomtitle.findOne({
+            where: {
+                studentid: id,
+                status: 1,
+            }
+        })
+        // console.log('customTit', customTit)
+
+
+        let titres = await customTit.update({
+            teacher_audit: 1
+        })
+
+        // console.log('titres', titres)
+
+        let stu = await ctx.model.Student.findByPk(id)
+        let stures = await stu.update({
+            select_title_status: 2,
+            select_subject: customTit.dataValues.title_name
+        })
+
+        return [stures, titres]
     }
 }
 

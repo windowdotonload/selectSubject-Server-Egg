@@ -67,7 +67,7 @@ class StudentService extends Service {
             select_title_status: 1,
         })
         let applyRes = await ctx.model.Applyhistory.create({
-            content: '申请题目',
+            content: `申请${titlename}题目`,
             studentid: stuid
         })
         return [res, applyRes]
@@ -110,7 +110,26 @@ class StudentService extends Service {
             custom_title_status: 0,
             select_title_status: 1
         })
-        return res
+        let oldtitle = await ctx.model.Stucustomtitle.findAll({
+            where: {
+                studentid: id
+            }
+        })
+        oldtitle.forEach(async item => {
+            let tit = await ctx.model.Stucustomtitle.findByPk(item.dataValues.id)
+            await tit.update({
+                status: 0
+            })
+        })
+        // console.log('oldtitle', oldtitle)
+        let customres = await ctx.model.Stucustomtitle.create({
+            title_name,
+            title_description,
+            status: 1,
+            studentid: id,
+            teacher_audit: 0
+        })
+        return [res, customres]
     }
 
     async stuChangeTitle(params) {
@@ -131,6 +150,41 @@ class StudentService extends Service {
             status: 0,
             studentid: null
         })
+        return [stures, titres]
+    }
+
+    async modStuConfirmChangeTitle(params) {
+        const { ctx } = this
+        const { id } = params
+        // console.log('stuid', id)
+        let stu = await ctx.model.Student.findByPk(id)
+        let titleid = stu.dataValues.titleid
+        let ifcustom = stu.dataValues.ifcustom
+        let stures = await stu.update({
+            titleid: null,
+            select_title_status: 0,
+            select_subject: '',
+            title_name: '',
+            title_description: '',
+        })
+        let titres
+        if (titleid) {
+            // 判断学生是自定义题目还是选择的老师题目
+            // 如果是自定义的题目，因为自定义的题目就是这个学生自已出的，所以自定义题目表是改变status
+            // 如果是选择的老师出题表,需要改变老师出题表的选择状态
+            if (ifcustom == 1) {
+                let stuCustomTit = await ctx.model.Stucustomtitle.findByPk(titleid)
+                titres = await stuCustomTit.update({
+                    status: 0
+                })
+            } else {
+                let title = await ctx.model.Title.findByPk(titleid)
+                titres = await title.update({
+                    status: 0,
+                    studentid: null
+                })
+            }
+        }
         return [stures, titres]
     }
 

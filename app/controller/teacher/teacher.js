@@ -239,6 +239,24 @@ class TeacherController extends Controller {
             }
         }
     }
+
+    async teacherAuditCustomTitle() {
+        const { ctx } = this
+        let res = await ctx.service.teacher.teacherAuditCustomTitle(ctx.request.body)
+
+        if (res) {
+            console.log('ok')
+            ctx.body = {
+                msg: 'success',
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: 'error'
+            }
+        }
+
+    }
 }
 
 module.exports = TeacherController;

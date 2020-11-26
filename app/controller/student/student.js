@@ -183,6 +183,22 @@ class StudentController extends Controller {
         }
     }
 
+    async modStuConfirmChangeTitle() {
+        const { ctx } = this
+        let res = await ctx.service.student.modStuConfirmChangeTitle(ctx.request.body)
+
+        if (res) {
+            ctx.body = {
+                msg: "success",
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: 'error'
+            }
+        }
+    }
+
     async recordChangeTitle() {
         const { ctx } = this
         let res = await ctx.service.student.recordChangeTitle(ctx.request.body)
