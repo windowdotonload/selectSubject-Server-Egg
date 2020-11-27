@@ -194,6 +194,22 @@ class AdminController extends Controller {
         }
     }
 
+    async adminClickStuTitleInfo() {
+        const { ctx } = this
+        let res = await ctx.service.admin.adminClickStuTitleInfo(ctx.query)
+
+        if (res) {
+            ctx.body = {
+                msg: 'success',
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: "error"
+            }
+        }
+    }
+
     async showSelectTeacher() {
         const { ctx } = this
         // console.log(ctx.query)

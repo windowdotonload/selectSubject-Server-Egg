@@ -98,7 +98,7 @@ class TeacherService extends Service {
         let teares = await tea.update({
             titlenumber: titleNumber
         })
-        let res = await ctx.model.Title.create({ title_name, title_description, status: 0, teacherid: id, elasticsearchid: addRes.items[0].index._id })
+        let res = await ctx.model.Title.create({ title_name, title_description, recordid: tea.dataValues.current_record, status: 0, teacherid: id, elasticsearchid: addRes.items[0].index._id })
         // console.log(addRes)
         // res.dataValues.addRes = addRes
         // console.log('res is ', res)

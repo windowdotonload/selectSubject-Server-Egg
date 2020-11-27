@@ -246,8 +246,39 @@ class AdminService extends Service {
         }
     }
 
-    async adminShowTeacherTitle() {
+    async adminShowTeacherTitle(params) {
         const { ctx } = this
+        // console.log(params)
+        const { teacherid, recordid } = params
+        let res = await ctx.model.Title.findAll({
+            where: {
+                teacherid,
+                recordid
+            }
+        })
+        return res
+    }
+
+    async adminClickStuTitleInfo(params) {
+        const { ctx } = this
+
+        const { id } = params
+
+        let stu = await ctx.model.Student.findByPk(id)
+
+        let titid = stu.dataValues.titleid
+        // console.log('titid', titid)
+        let titres
+        if (titid) {
+            if (stu.dataValues.ifcustom == 1) {
+                titres = await ctx.model.Stucustomtitle.findByPk(titid)
+            } else {
+                titres = await ctx.model.Title.findByPk(titid)
+
+            }
+        }
+        // console.log('titres', titres)
+        return titres
     }
 }
 
