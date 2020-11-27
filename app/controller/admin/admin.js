@@ -66,6 +66,23 @@ class AdminController extends Controller {
         }
     }
 
+    async checkOtherRecordFinish() {
+        const { ctx } = this
+        let res = await ctx.service.admin.checkOtherRecordFinish()
+
+        if (res) {
+            ctx.body = {
+                msg: 'success',
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: 'error'
+            }
+        }
+
+    }
+
     // 标记学生对应的记录信息的id
     static recordid = 0
     async addRecordId() {
@@ -149,6 +166,22 @@ class AdminController extends Controller {
         // console.log('-----------')
         // console.log('res is ', res)
         // console.log('-----------')
+        if (res) {
+            ctx.body = {
+                msg: 'success',
+                data: res
+            }
+        } else {
+            ctx.body = {
+                msg: "error"
+            }
+        }
+    }
+
+    async adminShowTeacherTitle() {
+        const { ctx } = this
+        let res = await ctx.service.admin.adminShowTeacherTitle(ctx.query)
+
         if (res) {
             ctx.body = {
                 msg: 'success',

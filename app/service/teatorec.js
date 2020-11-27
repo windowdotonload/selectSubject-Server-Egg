@@ -1,3 +1,8 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+ */
 'use strict';
 
 const Service = require('egg').Service;
@@ -10,7 +15,7 @@ class TeatorecService extends Service {
         let realAddTeacherId = []
         // console.log(recordid, teacherid)
         // Promise.all中传入的参数是一个数组
-        console.log(realAddTeacherId)
+        // console.log(realAddTeacherId)
         return Promise.all(
             teacherid.map(async (item) => {
                 let exist = await ctx.model.TeaTOrec.findOne({
@@ -25,7 +30,9 @@ class TeatorecService extends Service {
                     let res = await ctx.model.TeaTOrec.create({ recordid, teacherid: item })
                     let tea = await ctx.model.Teacher.findByPk(item)
                     await tea.update({
-                        loginauth: 1
+                        loginauth: 1,
+                        current_record: recordid,
+                        titlenumber: 0
                     })
                     // console.log(res)
                     return res
@@ -44,8 +51,12 @@ class TeatorecService extends Service {
                 recordid
             }
         })
+        let tea = await ctx.model.Teacher.findByPk(teacherid)
+        let teares = await tea.update({
+            loginauth: 0
+        })
         let res = await rec.destroy()
-        return res
+        return [res, teares]
     }
 }
 

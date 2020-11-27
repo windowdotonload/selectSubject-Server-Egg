@@ -60,6 +60,18 @@ class AdminService extends Service {
         return res
     }
 
+    async checkOtherRecordFinish(params) {
+        const { ctx } = this
+
+        let res = await ctx.model.Record.findAll({
+            where: {
+                status: 1
+            }
+        })
+
+        return res
+    }
+
     async overRecord(params) {
         const { ctx } = this
         const { id } = params
@@ -232,6 +244,10 @@ class AdminService extends Service {
                 msg: "can create"
             }
         }
+    }
+
+    async adminShowTeacherTitle() {
+        const { ctx } = this
     }
 }
 

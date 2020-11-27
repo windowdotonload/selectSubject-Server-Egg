@@ -9,7 +9,7 @@ class TeacherService extends Service {
         const { ctx } = this
         console.log(params)
         const { username, password, teachername, specialized_subject, phonenumber, tecentqnumber, professional } = params
-        let res = await ctx.model.Teacher.create({ username, password: md5(password), teachername, specialized_subject, phonenumber, tecentqnumber, professional, status: 1 })
+        let res = await ctx.model.Teacher.create({ username, password: md5(password), teachername, specialized_subject, phonenumber, tecentqnumber, professional, status: 1, titlenumber: 0 })
         return res
     }
 
@@ -93,11 +93,16 @@ class TeacherService extends Service {
             ]
         })
         // console.log(addRes.items[0].index._id)
+        let tea = await ctx.model.Teacher.findByPk(id)
+        let titleNumber = tea.dataValues.titlenumber + 1
+        let teares = await tea.update({
+            titlenumber: titleNumber
+        })
         let res = await ctx.model.Title.create({ title_name, title_description, status: 0, teacherid: id, elasticsearchid: addRes.items[0].index._id })
         // console.log(addRes)
         // res.dataValues.addRes = addRes
         // console.log('res is ', res)
-        return res
+        return [res, teares]
     }
 
     async showTitle(params) {

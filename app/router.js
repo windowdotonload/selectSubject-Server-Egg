@@ -18,6 +18,11 @@
  * @version: 
  * @Author: windowdotonload
  */
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+ */
 'use strict';
 
 /**
@@ -32,6 +37,7 @@ module.exports = app => {
   router.post('/addRecord', controller.admin.admin.addRecord)
   router.get('/getRecord', controller.admin.admin.getRecord)
   router.post('/deleteRecord', controller.admin.admin.deleteRecord)
+  router.get('/checkOtherRecordFinish', controller.admin.admin.checkOtherRecordFinish)
   router.post('/overRecord', controller.admin.admin.overRecord)
   router.post('/receiveFile', controller.admin.admin.receiveFile)
   router.get('/checkUploadStatus', controller.admin.admin.checkUploadStatus)
@@ -42,6 +48,7 @@ module.exports = app => {
   router.get('/showTeacher', controller.teacher.teacher.showTeacher)
   router.post('/editTeacher', controller.teacher.teacher.editTeacher)
   router.get('/showSelectTeacher', controller.admin.admin.showSelectTeacher)
+  router.get('/adminShowTeacherTitle', controller.admin.admin.adminShowTeacherTitle)
   router.post('/deleteSelectTeacher', controller.admin.admin.deleteSelectTeacher)
   router.post('/submitEditStudent', controller.admin.admin.submitEditStudent)
   router.post('/deleteStudent', controller.admin.admin.deleteStudent)
