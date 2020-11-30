@@ -90,6 +90,7 @@ module.exports = appInfo => {
       db: 0
     },
   }
+
   // add your middleware config here
   config.middleware = ['auth'];
 
