@@ -26,6 +26,9 @@ class AdminService extends Service {
         const { pagesize, pagenumber } = params
         // console.log(pagesize, pagenumber)
         const user = await ctx.model.Record.findAndCountAll({
+            where: {
+                existstatus: 1
+            },
             limit: Number(pagesize),
             offset: (Number(pagenumber) - 1) * Number(pagesize),
         });
@@ -38,7 +41,7 @@ class AdminService extends Service {
         // console.log('this.ctx   ', this.ctx)
         const { recordname, deadline, studentnumber, teachernumber } = params
         // 使用app.model和ctx.model都可以使用sequelize，但参考官方使用的ctx.model
-        const user = await ctx.model.Record.create({ recordname, deadline, studentnumber, teachernumber, status: 1 });
+        const user = await ctx.model.Record.create({ recordname, deadline, studentnumber, teachernumber, status: 1, existstatus: 1 });
         return user
     }
 
@@ -117,7 +120,7 @@ class AdminService extends Service {
         const { app, ctx } = this
         const { id } = params
         const rec = await ctx.model.Record.findByPk(id)
-        let res = await rec.update({ status: 0 })
+        let res = await rec.update({ existstatus: 0 })
         return res
     }
 

@@ -1,3 +1,8 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+ */
 'use strict';
 
 module.exports = app => {
@@ -8,6 +13,7 @@ module.exports = app => {
         deadline: DATE,
         studentnumber: INTEGER,
         teachernumber: INTEGER,
-        status: INTEGER
+        status: INTEGER,
+        existstatus: INTEGER,
     };
 };

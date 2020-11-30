@@ -378,6 +378,8 @@ class TeacherService extends Service {
                 status: 0
             }
         })
+
+        return res
     }
 }
 
