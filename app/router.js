@@ -86,6 +86,7 @@ module.exports = app => {
   router.post('/teacherAuditCustomTitle', controller.teacher.teacher.teacherAuditCustomTitle)
   router.get('/checkUsernameExist', controller.admin.admin.checkUsernameExist)
   router.get("/adminClickStuTitleInfo", controller.admin.admin.adminClickStuTitleInfo)
+  router.get('/teacherLookUpPastRecord', controller.teacher.teacher.teacherLookUpPastRecord)
 
   io.of('/').route('server', io.controller.default.server);
 };

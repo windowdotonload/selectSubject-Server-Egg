@@ -369,6 +369,16 @@ class TeacherService extends Service {
 
         return [stures, titres]
     }
+
+    async teacherLookUpPastRecord() {
+        const { ctx } = this
+
+        let res = await ctx.model.Record.findAll({
+            where: {
+                status: 0
+            }
+        })
+    }
 }
 
 module.exports = TeacherService;
