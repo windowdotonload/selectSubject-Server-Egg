@@ -7,7 +7,8 @@ class StudentService extends Service {
         const { ctx } = this
         const { studentid, teacherid } = params
         let stu = await ctx.model.Student.findByPk(studentid)
-        let res = await stu.update({ teacherid })
+        let tea = await ctx.model.Teacher.findByPk(teacherid)
+        let res = await stu.update({ teacherid, select_teacher: tea.dataValues.teachername })
         return res
     }
 
