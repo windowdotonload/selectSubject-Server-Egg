@@ -109,10 +109,13 @@ class TeacherService extends Service {
         const { ctx } = this
         const { id } = params
         // console.log('id is ', id)
+        let tea = await ctx.model.Teacher.findByPk(id)
+        let recid = tea.dataValues.current_record
         let res = await ctx.model.Title.findAll(
             {
                 where: {
-                    teacherid: id
+                    teacherid: id,
+                    recordid: recid
                 }
             }
         )
@@ -204,9 +207,13 @@ class TeacherService extends Service {
     async showSelectTeacherTitle(params) {
         const { ctx } = this
         const { id } = params
+        let tea = await ctx.model.Teacher.findByPk(id)
+        let recid = tea.dataValues.current_record
+        console.log(recid)
         let res = await ctx.model.Title.findAll({
             where: {
                 teacherid: id,
+                recordid: recid
                 // status: 0
             }
         })

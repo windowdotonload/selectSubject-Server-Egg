@@ -18,10 +18,12 @@ class StudentService extends Service {
         let stu = await ctx.model.Student.findByPk(id)
         // console.log(stu)
         const teacherid = stu.dataValues.teacherid
+        let tea = await ctx.model.Teacher.findByPk(teacherid)
         // console.log(teacherid)
         let res = await ctx.model.Title.findAll({
             where: {
-                teacherid
+                teacherid,
+                recordid: tea.dataValues.current_record
             }
         })
         // console.log(res)
