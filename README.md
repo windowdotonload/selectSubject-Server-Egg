@@ -15,7 +15,7 @@
 
 数据库的采用的是mysql，使用sequelize  
 
-因为涉及到了一个模糊搜索的需求，所以也是用了elasticsearch全文搜索引擎。
+因为涉及到了一个模糊搜索的需求，所以也用了elasticsearch全文搜索引擎。
 
 ### Development
 
