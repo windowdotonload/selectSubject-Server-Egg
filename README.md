@@ -3,6 +3,11 @@
  * @version: 
  * @Author: windowdotonload
 -->
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+-->
 # egg_server
 
 
@@ -16,6 +21,8 @@
 数据库的采用的是mysql，使用sequelize  
 
 因为涉及到了一个模糊搜索的需求，所以也用了elasticsearch全文搜索引擎。
+
+使用egg-socket做了一个简单通信
 
 ### Development
 
