@@ -233,14 +233,18 @@ class TeacherService extends Service {
 
     async passStudentSelTitle(params) {
         const { ctx } = this
-        const { id } = params
+        const { id, title_name } = params
 
         let stu = await ctx.model.Student.findByPk(id)
         let stures = await stu.update({ select_title_status: 2 })
         let titleid = stu.dataValues.titleid
         let tit = await ctx.model.Title.findByPk(titleid)
         let titres = await tit.update({ status: 2 })
-        return [stures, titres]
+        let recres = await ctx.model.Applyhistory.create({
+            content: `申请${title_name}已通过`,
+            studentid: id
+        })
+        return [stures, titres, recres]
 
     }
 
@@ -343,7 +347,7 @@ class TeacherService extends Service {
 
     async teacherAuditCustomTitle(params) {
         const { ctx } = this
-        const { id } = params
+        const { id, title_name } = params
 
 
         let customTit = await ctx.model.Stucustomtitle.findOne({
@@ -367,7 +371,12 @@ class TeacherService extends Service {
             select_subject: customTit.dataValues.title_name
         })
 
-        return [stures, titres]
+        let recres = await ctx.model.Applyhistory.create({
+            content: `申请${title_name}已通过`,
+            studentid: id
+        })
+
+        return [stures, titres, recres]
     }
 
     async teacherLookUpPastRecord() {
