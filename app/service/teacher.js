@@ -223,9 +223,12 @@ class TeacherService extends Service {
     async teaGetSelectStuInfo(params) {
         const { ctx } = this
         const { id } = params
+        let tea = await ctx.model.Teacher.findByPk(id)
+
         let res = await ctx.model.Student.findAll({
             where: {
-                teacherid: id
+                teacherid: id,
+                recordto: tea.dataValues.current_record
             }
         })
         return res
