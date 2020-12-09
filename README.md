@@ -8,6 +8,11 @@
  * @version: 
  * @Author: windowdotonload
 -->
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+-->
 # egg_server
 
 
@@ -18,9 +23,11 @@
 
 登录是采用的JWT，当前端请求接口的时候，在中间键中根据前端传过来的token进行一个认证，如果认证通过则正常调用接口，否则返回错误信息。 
 
-数据库的采用的是mysql，使用sequelize进行数据库操作
+数据库的采用的是mysql，使用sequelize进行数据库操作。
 
-因为涉及到了一个模糊搜索的需求，所以也用了elasticsearch全文搜索引擎。
+使用xlsx插件处理前端从excel表格中导入的数据信息。
+
+因为涉及到了模糊搜索的需求，所以使用了elasticsearch全文搜索引擎。
 
 使用egg-socket做了一个简单通信
 
