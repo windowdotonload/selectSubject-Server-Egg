@@ -8,8 +8,14 @@
  * @version: 
  * @Author: windowdotonload
 -->
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: windowdotonload
+-->
 # egg_server
 
+## [预览](47.97.195.37:6800)
 
 ### 这是课程选题系统的后端实现，采用的是阿里的egg框架🥚
 
